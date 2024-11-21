@@ -88,7 +88,7 @@ cart.forEach((cartItem) => {
               <div class="delivery-option-price">
                 $9.99 - Shipping
               </div>
-            </div>
+            </div>  
           </div>
         </div>
       </div>
