@@ -1,14 +1,14 @@
 class Cart {
   cartItems;
-  localStorageKey;
+  #localStorageKey;
 
   constructor(localStorageKey) {
-    this.localStorageKey = localStorageKey;
-    this.loadFromStorage(); // 변수에 저장한 object 속 함수 실행 // 바꾼 키로 로컬스토리지 재실행하는 것.
+    this.#localStorageKey = localStorageKey;
+    this.#loadFromStorage(); // 변수에 저장한 object 속 함수 실행 // 바꾼 키로 로컬스토리지 재실행하는 것.
   }
 
-  loadFromStorage() {
-    this.cartItems = JSON.parse(localStorage.getItem(this.localStorageKey)); // 'cart-oop' so that we dont affect our original cart. 미리 해당 이름으로 지정해놓은 로컬스토리지가 없을테니 디폴트 값이 들어가겠지.
+  #loadFromStorage() {
+    this.cartItems = JSON.parse(localStorage.getItem(this.#localStorageKey)); // 'cart-oop' so that we dont affect our original cart. 미리 해당 이름으로 지정해놓은 로컬스토리지가 없을테니 디폴트 값이 들어가겠지.
   
     if (!this.cartItems) {
       this.cartItems = [{
@@ -24,7 +24,7 @@ class Cart {
   }
 
   saveToStorage() {
-    localStorage.setItem(this.localStorageKey, JSON.stringify(this.cartItems));
+    localStorage.setItem(this.#localStorageKey, JSON.stringify(this.cartItems));
   }
 
   addToCart(productId) {
