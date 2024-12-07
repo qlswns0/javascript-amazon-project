@@ -34,6 +34,27 @@ class Product {
   getPrice() {
     return `$${formatCurrency(this.priceCents)}`
   }
+
+  extraInfoHTML() {
+    return ''; // parent class에서 다폴트 받고
+  }
+}
+
+class Clothing extends Product {
+  sizeChartLink;
+
+  constructor(productDetails) {
+    super(productDetails);
+    this.sizeChartLink = productDetails.sizeChartLink;
+  }
+
+  extraInfoHTML() {
+    return `  
+      <a href="${this.sizeChartLink}" target="_blank">
+        Size chart
+      </a>
+    `; // child class에서 구체값 받고.(순서에 따르니 그 전의 값이 overridden) // parent값 다시 필요하면 super.  사용
+  }
 }
 
 export const products = [
@@ -80,7 +101,7 @@ export const products = [
       "apparel",
       "mens"
     ],
-    type: "clothing",
+    type: "clothing", // which class should we use
     sizeChartLink: "images/clothing-size-chart.png"
   },
   {
@@ -696,5 +717,8 @@ export const products = [
     ]
   }
 ].map((productDetails) => {
+  if (productDetails.type === 'clothing') {
+    return new Clothing(productDetails);
+  }
   return new Product(productDetails);
 });
