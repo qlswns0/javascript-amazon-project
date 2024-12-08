@@ -103,6 +103,8 @@ export function loadProductsFetch() {
     });
 
     console.log('load products');
+  }).catch((error) => {
+    console.log('Unexpected error. Please try again later.');
   });
 
   return promise; // fetch를 쓰면 promise 그 자체 반환 가능 -> async 해결시 코드효율
@@ -127,6 +129,10 @@ export function loadProducts(fun) {
     console.log('load products');
 
     fun();
+  });
+
+  xhr.addEventListener('error', (error) => {
+    console.log('Unexpected error. Please try again later.')
   });
 
   xhr.open('GET', 'https://supersimplebackend.dev/products');
